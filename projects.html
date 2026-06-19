@@ -1,0 +1,555 @@
+<!doctype html>
+
+<html class="dark" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        background-color: #0f111a;
+        color: #e1e1ef;
+        font-family: "Inter", sans-serif;
+        margin: 0;
+        overflow-x: hidden;
+      }
+
+      .terminal-window {
+        background-color: #1a1b26;
+        border: 1px solid #292e42;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+      }
+
+      .terminal-window:hover {
+        border-color: #7dcfff;
+        box-shadow:
+          0 0 15px rgba(125, 207, 255, 0.2),
+          0 10px 30px rgba(0, 0, 0, 0.5);
+      }
+
+      .mac-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+      }
+
+      .blinking-cursor::after {
+        content: "█";
+        animation: blink 1s step-end infinite;
+        color: #c0caf5;
+        margin-left: 4px;
+      }
+
+      @keyframes blink {
+        50% {
+          opacity: 0;
+        }
+      }
+
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 400,
+          "GRAD" 0,
+          "opsz" 24;
+      }
+    </style>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "secondary-fixed": "#c0f289",
+              "surface-container-lowest": "#0c0e17",
+              "secondary-container": "#355d00",
+              "text-console": "#c0caf5",
+              "on-surface": "#e1e1ef",
+              "on-primary-fixed": "#001e2d",
+              "terminal-header": "#16161e",
+              "outline-variant": "#3f484e",
+              "secondary-fixed-dim": "#a5d570",
+              "surface-bright": "#373943",
+              "workspace-bg": "#0f111a",
+              "primary-fixed": "#c5e7ff",
+              "error-container": "#93000a",
+              "on-error": "#690005",
+              "surface-container-high": "#282933",
+              "terminal-bg": "#1a1b26",
+              "on-tertiary-container": "#6f4b0b",
+              "inverse-primary": "#00658c",
+              "tertiary-fixed-dim": "#f0be75",
+              "text-primary": "#a9b1d6",
+              "surface-container-low": "#191b24",
+              "on-secondary-fixed-variant": "#2d5000",
+              "on-background": "#e1e1ef",
+              "accent-magenta": "#bb9af7",
+              "tertiary-fixed": "#ffddb2",
+              "surface-dim": "#11131c",
+              "surface-container-highest": "#32343e",
+              "mac-red": "#ff5f56",
+              secondary: "#a5d570",
+              "on-tertiary": "#442b00",
+              "border-inactive": "#292e42",
+              "inverse-surface": "#e1e1ef",
+              primary: "#c3e6ff",
+              "inverse-on-surface": "#2e303a",
+              error: "#ffb4ab",
+              background: "#11131c",
+              "text-muted": "#565f89",
+              "on-primary": "#00344a",
+              "primary-container": "#7dcfff",
+              "on-secondary-container": "#a4d570",
+              "mac-green": "#27c93f",
+              "surface-variant": "#32343e",
+              "on-secondary-fixed": "#0f2000",
+              "on-tertiary-fixed-variant": "#624000",
+              "on-surface-variant": "#bfc8cf",
+              "surface-tint": "#7fd0ff",
+              "on-error-container": "#ffdad6",
+              tertiary: "#ffdcaf",
+              "on-secondary": "#1d3700",
+              outline: "#899299",
+              "tertiary-container": "#f0bd75",
+              "surface-container": "#1d1f29",
+              "mac-yellow": "#ffbd2e",
+              surface: "#11131c",
+              "on-primary-container": "#00587a",
+              "on-primary-fixed-variant": "#004c6a",
+              "primary-fixed-dim": "#7fd0ff",
+              "on-tertiary-fixed": "#291800",
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              full: "9999px",
+            },
+            spacing: {
+              "container-margin": "40px",
+              "window-padding": "20px",
+              "header-height": "32px",
+              "window-gap": "24px",
+              gutter: "16px",
+            },
+            fontFamily: {
+              "section-heading": ["Inter"],
+              "window-title": ["JetBrains Mono"],
+              "terminal-prompt": ["JetBrains Mono"],
+              "body-text": ["Inter"],
+              "tech-tag": ["JetBrains Mono"],
+              "terminal-prompt-mobile": ["JetBrains Mono"],
+            },
+            fontSize: {
+              "section-heading": [
+                "24px",
+                { lineHeight: "1.2", fontWeight: "600" },
+              ],
+              "window-title": [
+                "14px",
+                { lineHeight: "1.0", fontWeight: "500" },
+              ],
+              "terminal-prompt": [
+                "16px",
+                { lineHeight: "1.5", fontWeight: "600" },
+              ],
+              "body-text": ["16px", { lineHeight: "1.6", fontWeight: "400" }],
+              "tech-tag": ["13px", { lineHeight: "1.2", fontWeight: "500" }],
+              "terminal-prompt-mobile": [
+                "14px",
+                { lineHeight: "1.4", fontWeight: "600" },
+              ],
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <!-- TopNavBar -->
+    <header
+      class="bg-terminal-header text-primary font-window-title text-window-title docked full-width top-0 border-b border-outline-variant shadow-sm flex justify-between items-center h-header-height px-window-padding w-full z-50 fixed top-0"
+    >
+      <div class="flex items-center gap-4">
+        <span class="font-terminal-prompt text-terminal-prompt text-secondary"
+          >dev@workspace: ~</span
+        >
+      </div>
+      <nav class="hidden md:flex items-center gap-6">
+        <a
+          class="font-window-title text-window-title text-text-muted hover:text-text-primary transition-colors"
+          href="index.html"
+          >Portfolio</a
+        >
+        <a
+          class="font-window-title text-window-title text-primary font-bold border-b-2 border-primary pb-1"
+          href="projects.html"
+          >Projects</a
+        >
+        <!-- di hidden dulu
+        <a
+          class="font-window-title text-window-title text-text-muted hover:text-text-primary transition-colors"
+          href="#"
+          >Stack</a
+        >
+        <a
+          class="font-window-title text-window-title text-text-muted hover:text-text-primary transition-colors"
+          href="#"
+          >Contact</a
+        >
+        -->
+      </nav>
+      <div class="flex items-center gap-3">
+        <button
+          class="p-1 hover:bg-surface-variant/50 transition-all duration-200 ease-in-out rounded"
+        >
+          <span class="material-symbols-outlined text-primary">terminal</span>
+        </button>
+        <button
+          class="p-1 hover:bg-surface-variant/50 transition-all duration-200 ease-in-out rounded"
+        >
+          <span class="material-symbols-outlined text-primary">settings</span>
+        </button>
+      </div>
+    </header>
+    <main class="pt-16 pb-20 px-6 max-w-7xl mx-auto min-h-screen">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-window-gap mt-8">
+        <section
+          class="terminal-window bg-terminal-bg border border-border-inactive rounded-lg flex flex-col h-full overflow-hidden"
+        >
+          <div
+            class="bg-terminal-header h-header-height px-4 flex items-center justify-between"
+          >
+            <div class="flex gap-2">
+              <div class="w-3 h-3 rounded-full bg-mac-red"></div>
+              <div class="w-3 h-3 rounded-full bg-mac-yellow"></div>
+              <div class="w-3 h-3 rounded-full bg-mac-green"></div>
+            </div>
+            <div class="font-window-title text-window-title text-text-muted">
+              ~/projects/remittance
+            </div>
+            <div class="w-12"></div>
+          </div>
+
+          <div class="p-window-padding flex flex-col gap-6 overflow-y-auto">
+            <div class="font-terminal-prompt text-terminal-prompt">
+              <span class="text-mac-green">dimas@server</span
+              ><span class="text-text-primary">:</span
+              ><span class="text-primary-container">~/projects/remittance</span
+              ><span class="text-text-primary">$ cat remittance-sys.md</span>
+            </div>
+
+            <h1
+              class="font-section-heading text-section-heading text-on-surface mt-2"
+            >
+              Remittance Backend System
+            </h1>
+            <p class="font-body-text text-body-text text-text-console">
+              Mengembangkan sistem backend remittance menggunakan framework Gin
+              untuk memfasilitasi pengiriman token antar pengguna yang
+              terdaftar. Mengintegrasikan webhook blockchain untuk mencatat
+              setiap transaksi ke dalam database MySQL, serta
+              mengimplementasikan Socket.IO dan FCM untuk notifikasi real-time.
+            </p>
+
+            <div class="flex flex-wrap gap-2">
+              <span
+                class="font-tech-tag text-tech-tag px-3 py-1 bg-[#e0af681a] border border-[#e0af6833] text-[#e0af68] rounded"
+                >Go</span
+              >
+              <span
+                class="font-tech-tag text-tech-tag px-3 py-1 bg-[#e0af681a] border border-[#e0af6833] text-[#e0af68] rounded"
+                >Gin</span
+              >
+              <span
+                class="font-tech-tag text-tech-tag px-3 py-1 bg-[#e0af681a] border border-[#e0af6833] text-[#e0af68] rounded"
+                >MySQL</span
+              >
+              <span
+                class="font-tech-tag text-tech-tag px-3 py-1 bg-[#e0af681a] border border-[#e0af6833] text-[#e0af68] rounded"
+                >Redis</span
+              >
+              <span
+                class="font-tech-tag text-tech-tag px-3 py-1 bg-[#e0af681a] border border-[#e0af6833] text-[#e0af68] rounded"
+                >Webhook Blockchain</span
+              >
+              <span
+                class="font-tech-tag text-tech-tag px-3 py-1 bg-[#e0af681a] border border-[#e0af6833] text-[#e0af68] rounded"
+                >Socket.IO</span
+              >
+              <span
+                class="font-tech-tag text-tech-tag px-3 py-1 bg-[#e0af681a] border border-[#e0af6833] text-[#e0af68] rounded"
+                >FCM</span
+              >
+            </div>
+
+            <div class="space-y-2">
+              <div
+                class="rounded-md border border-outline-variant overflow-hidden bg-surface-container-low relative group"
+              >
+                <img
+                  src="assets/remittance-arch.svg"
+                  alt="Diagram Arsitektur Remittance"
+                  class="w-full h-auto cursor-zoom-in transition-transform duration-300 group-hover:scale-[1.02]"
+                  onclick="openLightbox(this.src)"
+                />
+              </div>
+
+              <p
+                class="text-tech-tag font-tech-tag text-text-muted text-center mt-2"
+              >
+                Gambar 1: Arsitektur event-driven penanganan transaksi token.
+                <br />
+                <span class="text-[11px] text-mac-yellow"
+                  >(Klik gambar untuk melihat ukuran penuh)</span
+                >
+              </p>
+            </div>
+
+            <div class="space-y-4">
+              <h2 class="font-section-heading text-[20px] text-secondary">
+                Tantangan Teknis
+              </h2>
+              <ul class="space-y-3">
+                <li class="flex items-start gap-3 group">
+                  <span class="text-mac-green font-bold">[*]</span>
+                  <span
+                    class="font-body-text text-body-text text-text-console group-hover:text-primary transition-colors"
+                    >Penanganan transaksi database berurutan dan aman</span
+                  >
+                </li>
+                <li class="flex items-start gap-3 group">
+                  <span class="text-mac-green font-bold">[*]</span>
+                  <span
+                    class="font-body-text text-body-text text-text-console group-hover:text-primary transition-colors"
+                    >Integrasi webhook blockchain yang andal</span
+                  >
+                </li>
+                <li class="flex items-start gap-3 group">
+                  <span class="text-mac-green font-bold">[*]</span>
+                  <span
+                    class="font-body-text text-body-text text-text-console group-hover:text-primary transition-colors"
+                    >Sinkronisasi notifikasi real-time secara presisi</span
+                  >
+                </li>
+              </ul>
+
+              <div class="font-terminal-prompt text-terminal-prompt pt-4">
+                <span class="text-mac-green">dimas@server</span
+                ><span class="text-text-primary">:</span
+                ><span class="text-primary-container">~/projects/remittance</span
+                ><span class="text-text-primary">$ </span
+                ><span class="blinking-cursor"></span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section
+          class="terminal-window bg-terminal-bg border border-border-inactive rounded-lg flex flex-col h-full overflow-hidden"
+        >
+          <div
+            class="bg-terminal-header h-header-height px-4 flex items-center justify-between"
+          >
+            <div class="flex gap-2">
+              <div class="w-3 h-3 rounded-full bg-mac-red"></div>
+              <div class="w-3 h-3 rounded-full bg-mac-yellow"></div>
+              <div class="w-3 h-3 rounded-full bg-mac-green"></div>
+            </div>
+            <div class="font-window-title text-window-title text-text-muted">
+              ~/projects/webmail
+            </div>
+            <div class="w-12"></div>
+          </div>
+
+          <div class="p-window-padding flex flex-col gap-6 overflow-y-auto">
+            <div class="font-terminal-prompt text-terminal-prompt">
+              <span class="text-mac-green">dimas@server</span
+              ><span class="text-text-primary">:</span
+              ><span class="text-primary-container">~/projects/webmail</span
+              ><span class="text-text-primary">$ cat webmail-sys.md</span>
+            </div>
+
+            <h1
+              class="font-section-heading text-section-heading text-on-surface mt-2"
+            >
+              Webmail Backend System
+            </h1>
+            <p class="font-body-text text-body-text text-text-console">
+              Membangun sistem backend webmail kustom dengan mengintegrasikan
+              Mailcow sebagai engine utamanya. Mengembangkan API yang efisien
+              menggunakan Go dan Gin untuk mengelola operasional email berbasis
+              IMAP/SMTP, terintegrasi dengan MySQL dan Socket.IO untuk
+              pemrosesan data real-time.
+            </p>
+
+            <div class="flex flex-wrap gap-2">
+              <span
+                class="font-tech-tag text-tech-tag px-3 py-1 bg-[#e0af681a] border border-[#e0af6833] text-[#e0af68] rounded"
+                >Go</span
+              >
+              <span
+                class="font-tech-tag text-tech-tag px-3 py-1 bg-[#e0af681a] border border-[#e0af6833] text-[#e0af68] rounded"
+                >Gin</span
+              >
+              <span
+                class="font-tech-tag text-tech-tag px-3 py-1 bg-[#e0af681a] border border-[#e0af6833] text-[#e0af68] rounded"
+                >MySQL</span
+              >
+              <span
+                class="font-tech-tag text-tech-tag px-3 py-1 bg-[#e0af681a] border border-[#e0af6833] text-[#e0af68] rounded"
+                >Socket.IO</span
+              >
+              <span
+                class="font-tech-tag text-tech-tag px-3 py-1 bg-[#e0af681a] border border-[#e0af6833] text-[#e0af68] rounded"
+                >Mailcow</span
+              >
+            </div>
+
+            <div class="space-y-2">
+              <div
+                class="rounded-md border border-outline-variant overflow-hidden bg-surface-container-low relative group"
+              >
+                <img
+                  src="assets/webmail-arch.svg"
+                  alt="Diagram Arsitektur Webmail"
+                  class="w-full h-auto cursor-zoom-in transition-transform duration-300 group-hover:scale-[1.02]"
+                  onclick="openLightbox(this.src)"
+                />
+              </div>
+
+              <p
+                class="text-tech-tag font-tech-tag text-text-muted text-center mt-2"
+              >
+                Gambar 2: Arsitektur integrasi API Go dengan engine Mailcow.
+                <br />
+                <span class="text-[11px] text-mac-yellow"
+                  >(Klik gambar untuk melihat ukuran penuh)</span
+                >
+              </p>
+            </div>
+
+            <div class="space-y-4">
+              <h2 class="font-section-heading text-[20px] text-secondary">
+                Tantangan Teknis
+              </h2>
+              <ul class="space-y-3">
+                <li class="flex items-start gap-3 group">
+                  <span class="text-mac-green font-bold">[*]</span>
+                  <span
+                    class="font-body-text text-body-text text-text-console group-hover:text-primary transition-colors"
+                    >Manajemen operasional dan protokol IMAP/SMTP via kustom
+                    API</span
+                  >
+                </li>
+                <li class="flex items-start gap-3 group">
+                  <span class="text-mac-green font-bold">[*]</span>
+                  <span
+                    class="font-body-text text-body-text text-text-console group-hover:text-primary transition-colors"
+                    >Sinkronisasi data real-time menggunakan Socket.IO</span
+                  >
+                </li>
+                <li class="flex items-start gap-3 group">
+                  <span class="text-mac-green font-bold">[*]</span>
+                  <span
+                    class="font-body-text text-body-text text-text-console group-hover:text-primary transition-colors"
+                    >Optimalisasi query mailcow</span
+                  >
+                </li>
+              </ul>
+
+              <div class="font-terminal-prompt text-terminal-prompt pt-4">
+                <span class="text-mac-green">dimas@server</span
+                ><span class="text-text-primary">:</span
+                ><span class="text-primary-container">~/projects/webmail</span
+                ><span class="text-text-primary">$ </span
+                ><span class="blinking-cursor"></span>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+    <!-- Footer -->
+    <footer
+      class="flex justify-between items-center px-window-padding py-1 w-full fixed bottom-0 z-50 bg-terminal-header border-t border-border-inactive flat no shadows opacity-80 hover:opacity-100 transition-opacity"
+    >
+      <div class="flex items-center gap-4">
+        <span class="font-tech-tag text-tech-tag text-mac-green"
+          >© 2026 Terminal Workspace v2.0.4</span
+        >
+      </div>
+      <div class="flex items-center gap-6">
+        <span class="font-tech-tag text-tech-tag text-text-muted"
+          >Status: Stable</span
+        >
+        <span class="font-tech-tag text-tech-tag text-text-muted"
+          >Uptime: 99.9%</span
+        >
+        <button
+          class="font-tech-tag text-tech-tag text-text-muted hover:text-text-console"
+        >
+          Logs
+        </button>
+      </div>
+    </footer>
+
+    <div
+      id="lightbox"
+      class="fixed inset-0 z-[100] bg-workspace-bg/95 hidden flex justify-center items-center backdrop-blur-sm transition-opacity duration-300 opacity-0"
+      onclick="closeLightbox()"
+    >
+      <img
+        id="lightbox-img"
+        src=""
+        class="max-w-[90%] max-h-[90%] object-contain rounded-lg shadow-2xl"
+      />
+      <span
+        class="absolute top-6 right-8 text-text-primary text-4xl cursor-pointer hover:text-white"
+        >&times;</span
+      >
+    </div>
+
+    <script>
+      // Simple micro-interaction for the terminal windows
+      document.querySelectorAll(".terminal-window").forEach((window) => {
+        window.addEventListener("mousemove", (e) => {
+          const rect = window.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+
+          // Optional: add a light dynamic glow effect based on mouse position
+          // window.style.boxShadow = `0 0 20px rgba(125, 207, 255, ${0.1 + (y/rect.height) * 0.1}), 0 10px 30px rgba(0, 0, 0, 0.5)`;
+        });
+      });
+      function openLightbox(imageSrc) {
+        const lightbox = document.getElementById("lightbox");
+        const lightboxImg = document.getElementById("lightbox-img");
+        lightboxImg.src = imageSrc;
+        lightbox.classList.remove("hidden");
+        // Sedikit delay agar efek transisi opacity terlihat
+        setTimeout(() => lightbox.classList.remove("opacity-0"), 10);
+      }
+
+      function closeLightbox() {
+        const lightbox = document.getElementById("lightbox");
+        lightbox.classList.add("opacity-0");
+        setTimeout(() => lightbox.classList.add("hidden"), 300);
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,515 @@
+<!doctype html>
+<html class="dark" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Dimas | Backend Engineer Portfolio</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&amp;family=Inter:wght@400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-tertiary": "#442b00",
+              "surface-container-low": "#191b24",
+              "surface-bright": "#373943",
+              "on-primary-fixed-variant": "#004c6a",
+              "terminal-header": "#16161e",
+              "primary-fixed-dim": "#7fd0ff",
+              "inverse-primary": "#00658c",
+              outline: "#899299",
+              "surface-container-lowest": "#0c0e17",
+              "on-secondary-fixed-variant": "#2d5000",
+              "outline-variant": "#3f484e",
+              "surface-variant": "#32343e",
+              "workspace-bg": "#0f111a",
+              "accent-magenta": "#bb9af7",
+              "mac-green": "#27c93f",
+              "border-inactive": "#292e42",
+              "text-console": "#c0caf5",
+              "secondary-fixed": "#c0f289",
+              "inverse-surface": "#e1e1ef",
+              "tertiary-fixed": "#ffddb2",
+              "tertiary-fixed-dim": "#f0be75",
+              "on-primary": "#00344a",
+              "on-error": "#690005",
+              "error-container": "#93000a",
+              "on-background": "#e1e1ef",
+              "surface-container": "#1d1f29",
+              "primary-fixed": "#c5e7ff",
+              "on-tertiary-fixed": "#291800",
+              "text-muted": "#565f89",
+              "text-primary": "#a9b1d6",
+              "on-primary-fixed": "#001e2d",
+              "on-surface-variant": "#bfc8cf",
+              "on-tertiary-fixed-variant": "#624000",
+              "on-secondary": "#1d3700",
+              secondary: "#a5d570",
+              "surface-dim": "#11131c",
+              "surface-container-highest": "#32343e",
+              "on-surface": "#e1e1ef",
+              "secondary-fixed-dim": "#a5d570",
+              "tertiary-container": "#f0bd75",
+              surface: "#11131c",
+              "terminal-bg": "#1a1b26",
+              "on-error-container": "#ffdad6",
+              "mac-yellow": "#ffbd2e",
+              error: "#ffb4ab",
+              "on-primary-container": "#00587a",
+              primary: "#c3e6ff",
+              "inverse-on-surface": "#2e303a",
+              "on-tertiary-container": "#6f4b0b",
+              "mac-red": "#ff5f56",
+              tertiary: "#ffdcaf",
+              background: "#11131c",
+              "secondary-container": "#355d00",
+              "primary-container": "#7dcfff",
+              "surface-container-high": "#282933",
+              "surface-tint": "#7fd0ff",
+              "on-secondary-container": "#a4d570",
+              "on-secondary-fixed": "#0f2000",
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              full: "9999px",
+            },
+            spacing: {
+              "window-gap": "24px",
+              gutter: "16px",
+              "header-height": "32px",
+              "container-margin": "40px",
+              "window-padding": "20px",
+            },
+            fontFamily: {
+              "terminal-prompt": ["JetBrains Mono"],
+              "window-title": ["JetBrains Mono"],
+              "section-heading": ["Inter"],
+              "terminal-prompt-mobile": ["JetBrains Mono"],
+              "body-text": ["Inter"],
+              "tech-tag": ["JetBrains Mono"],
+            },
+            fontSize: {
+              "terminal-prompt": [
+                "16px",
+                { lineHeight: "1.5", fontWeight: "600" },
+              ],
+              "window-title": [
+                "14px",
+                { lineHeight: "1.0", fontWeight: "500" },
+              ],
+              "section-heading": [
+                "24px",
+                { lineHeight: "1.2", fontWeight: "600" },
+              ],
+              "terminal-prompt-mobile": [
+                "14px",
+                { lineHeight: "1.4", fontWeight: "600" },
+              ],
+              "body-text": ["16px", { lineHeight: "1.6", fontWeight: "400" }],
+              "tech-tag": ["13px", { lineHeight: "1.2", fontWeight: "500" }],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      body {
+        background-color: #0f111a;
+        cursor: default;
+      }
+      .terminal-window {
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        transition:
+          border-color 0.2s ease,
+          box-shadow 0.2s ease;
+      }
+      .terminal-window:hover {
+        border-color: #7dcfff;
+        box-shadow:
+          0 0 15px rgba(125, 207, 255, 0.2),
+          0 10px 30px rgba(0, 0, 0, 0.5);
+      }
+      .cursor-blink {
+        animation: blink 1s infinite;
+        display: inline-block;
+        width: 8px;
+        height: 18px;
+        background-color: #c0caf5;
+        vertical-align: middle;
+        margin-left: 4px;
+      }
+      @keyframes blink {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0;
+        }
+      }
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 400,
+          "GRAD" 0,
+          "opsz" 24;
+        vertical-align: middle;
+      }
+    </style>
+  </head>
+  <body class="font-body-text text-on-surface antialiased overflow-x-hidden">
+    <!-- TopAppBar -->
+    <header
+      class="flex justify-between items-center h-header-height px-window-padding w-full z-50 bg-terminal-header border-b border-border-inactive shadow-sm fixed top-0"
+    >
+      <div class="flex items-center gap-4">
+        <span class="font-terminal-prompt text-terminal-prompt text-secondary"
+          >dev@workspace: ~</span
+        >
+      </div>
+      <nav class="hidden md:flex items-center gap-6">
+        <a
+          class="font-window-title text-window-title text-primary font-bold border-b-2 border-primary pb-1"
+          href="index.html"
+          >Portfolio</a
+        >
+        <a
+          class="font-window-title text-window-title text-text-muted hover:text-text-primary transition-colors"
+          href="projects.html"
+          >Projects</a
+        >
+        <!-- di hidden dulu
+        <a
+          class="font-window-title text-window-title text-text-muted hover:text-text-primary transition-colors"
+          href="#"
+          >Stack</a
+        >
+        <a
+          class="font-window-title text-window-title text-text-muted hover:text-text-primary transition-colors"
+          href="#"
+          >Contact</a
+        >
+        -->
+      </nav>
+      <div class="flex items-center gap-3">
+        <button
+          class="p-1 hover:bg-surface-variant/50 transition-all duration-200 ease-in-out rounded"
+        >
+          <span class="material-symbols-outlined text-primary">terminal</span>
+        </button>
+        <button
+          class="p-1 hover:bg-surface-variant/50 transition-all duration-200 ease-in-out rounded"
+        >
+          <span class="material-symbols-outlined text-primary">settings</span>
+        </button>
+      </div>
+    </header>
+    <!-- Content Canvas -->
+    <main class="pt-16 pb-20 px-6 max-w-7xl mx-auto min-h-screen">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-window-gap mt-8">
+        <!-- Left Column: ~/profile -->
+        <section
+          class="terminal-window bg-terminal-bg border border-border-inactive rounded-lg flex flex-col h-full overflow-hidden"
+        >
+          <!-- Header -->
+          <div
+            class="h-header-height bg-terminal-header flex items-center px-4 justify-between"
+          >
+            <div class="flex gap-2">
+              <div class="w-3 h-3 rounded-full bg-mac-red"></div>
+              <div class="w-3 h-3 rounded-full bg-mac-yellow"></div>
+              <div class="w-3 h-3 rounded-full bg-mac-green"></div>
+            </div>
+            <span class="font-window-title text-window-title text-text-muted"
+              >~/profile</span
+            >
+            <div class="w-12"></div>
+            <!-- Spacer for centering -->
+          </div>
+          <!-- Body -->
+          <div class="p-window-padding space-y-6">
+            <div class="font-terminal-prompt text-terminal-prompt">
+              <span class="text-mac-green">dimas@server</span
+              ><span class="text-text-primary">:</span
+              ><span class="text-primary-container">~/profile</span
+              ><span class="text-text-primary">$ ./show-about.sh</span>
+            </div>
+            <div class="space-y-4">
+              <h2
+                class="font-section-heading text-section-heading text-secondary"
+              >
+                About Me
+              </h2>
+              <p
+                class="font-body-text text-body-text text-text-primary leading-relaxed"
+              >
+                Halo, saya Dimas Saputra. Sebagai seorang Backend Developer,
+                spesialisasi utama saya ada di ekosistem Go (Golang). Saya
+                memiliki ketertarikan kuat dalam merancang infrastruktur backend
+                yang scalable saat membangun sistem yang tidak hanya cepat saat
+                menangani jutaan request sekaligus, tapi juga menjamin
+                integritas data di dalamnya.
+              </p>
+            </div>
+            <div class="space-y-4">
+              <h2
+                class="font-section-heading text-section-heading text-secondary"
+              >
+                Tech Stack
+              </h2>
+              <div class="flex flex-wrap gap-3">
+                <span
+                  class="px-3 py-1 font-tech-tag text-tech-tag bg-[rgba(224,175,104,0.1)] border border-[rgba(224,175,104,0.2)] text-tertiary-container rounded"
+                  >Go</span
+                >
+                <span
+                  class="px-3 py-1 font-tech-tag text-tech-tag bg-[rgba(224,175,104,0.1)] border border-[rgba(224,175,104,0.2)] text-tertiary-container rounded"
+                  >MySQL</span
+                >
+                <span
+                  class="px-3 py-1 font-tech-tag text-tech-tag bg-[rgba(224,175,104,0.1)] border border-[rgba(224,175,104,0.2)] text-tertiary-container rounded"
+                  >PostgreSQL</span
+                >
+                <span
+                  class="px-3 py-1 font-tech-tag text-tech-tag bg-[rgba(224,175,104,0.1)] border border-[rgba(224,175,104,0.2)] text-tertiary-container rounded"
+                  >Redis</span
+                >
+                <span
+                  class="px-3 py-1 font-tech-tag text-tech-tag bg-[rgba(224,175,104,0.1)] border border-[rgba(224,175,104,0.2)] text-tertiary-container rounded"
+                  >WebSocket</span
+                >
+                <span
+                  class="px-3 py-1 font-tech-tag text-tech-tag bg-[rgba(224,175,104,0.1)] border border-[rgba(224,175,104,0.2)] text-tertiary-container rounded"
+                  >REST API</span
+                >
+              </div>
+            </div>
+            <div class="space-y-4">
+              <h2
+                class="font-section-heading text-section-heading text-secondary"
+              >
+                Contact
+              </h2>
+              <div class="flex flex-col gap-2">
+                <div class="flex items-center gap-2">
+                  <span
+                    class="material-symbols-outlined text-primary text-[18px]"
+                    >mail</span
+                  >
+                  <a
+                    href="mailto:dev.dimassaputra@gmail.com"
+                    class="font-body-text text-primary hover:underline"
+                    >dev.dimassaputra@gmail.com</a
+                  >
+                </div>
+                <div class="flex items-center gap-2">
+                  <span
+                    class="material-symbols-outlined text-primary text-[18px]"
+                    >link</span
+                  >
+                  <a
+                    href="https://www.linkedin.com/in/dimas-saputra-dev"
+                    target="_blank"
+                    class="font-body-text text-primary hover:underline"
+                    >linkedin.com/in/dimas-saputra-dev</a
+                  >
+                </div>
+                <div class="flex items-center gap-2">
+                  <span
+                    class="material-symbols-outlined text-primary text-[18px]"
+                    >code</span
+                  >
+                  <a
+                    href="https://github.com/dimasnix"
+                    target="_blank"
+                    class="font-body-text text-primary hover:underline"
+                    >github.com/dimasnix</a
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="font-terminal-prompt text-terminal-prompt pt-4">
+              <span class="text-mac-green">dimas@server</span
+              ><span class="text-text-primary">:</span
+              ><span class="text-primary-container">~/profile</span
+              ><span class="text-text-primary">$ </span
+              ><span class="cursor-blink"></span>
+            </div>
+          </div>
+        </section>
+        <!-- Right Column: ~/projects -->
+        <section
+          class="terminal-window bg-terminal-bg border border-border-inactive rounded-lg flex flex-col h-full overflow-hidden"
+        >
+          <!-- Header -->
+          <div
+            class="h-header-height bg-terminal-header flex items-center px-4 justify-between"
+          >
+            <div class="flex gap-2">
+              <div class="w-3 h-3 rounded-full bg-mac-red"></div>
+              <div class="w-3 h-3 rounded-full bg-mac-yellow"></div>
+              <div class="w-3 h-3 rounded-full bg-mac-green"></div>
+            </div>
+            <span class="font-window-title text-window-title text-text-muted"
+              >~/projects</span
+            >
+            <div class="w-12"></div>
+          </div>
+          <!-- Body -->
+          <div class="p-window-padding space-y-6">
+            <div class="font-terminal-prompt text-terminal-prompt">
+              <span class="text-mac-green">dimas@server</span
+              ><span class="text-text-primary">:</span
+              ><span class="text-primary-container">~/projects</span
+              ><span class="text-text-primary">$ ls -la</span>
+            </div>
+            <div class="space-y-6">
+              <!-- Project 1 -->
+              <div
+                class="group border border-border-inactive/50 p-4 rounded bg-surface-container-lowest/30 hover:bg-surface-container-low transition-all duration-300"
+              >
+                <div class="flex items-center gap-2 mb-2">
+                  <span class="text-mac-green font-terminal-prompt">[+]</span>
+                  <h3 class="font-section-heading text-[20px] text-primary">
+                    Remittance Backend System
+                  </h3>
+                </div>
+                <p class="font-body-text text-body-text text-text-primary mb-4">
+                  Mengembangkan sistem backend remittance menggunakan framework
+                  Gin untuk memfasilitasi pengiriman token antar pengguna yang
+                  terdaftar. Mengintegrasikan webhook blockchain untuk mencatat
+                  setiap transaksi ke dalam database MySQL, serta
+                  mengimplementasikan Socket.IO dan FCM untuk mengirimkan
+                  notifikasi transaksi secara real-time kepada kedua belah pihak
+                  (pengirim dan penerima).
+                </p>
+                <div class="flex gap-2">
+                  <span
+                    class="text-[12px] font-tech-tag bg-surface-container-high px-2 py-0.5 rounded text-text-muted"
+                    >Go</span
+                  >
+                  <span
+                    class="text-[12px] font-tech-tag bg-surface-container-high px-2 py-0.5 rounded text-text-muted"
+                    >Gin</span
+                  >
+                  <span
+                    class="text-[12px] font-tech-tag bg-surface-container-high px-2 py-0.5 rounded text-text-muted"
+                    >MySQL</span
+                  >
+                  <span
+                    class="text-[12px] font-tech-tag bg-surface-container-high px-2 py-0.5 rounded text-text-muted"
+                    >Webhook Blockchain</span
+                  >
+                  <span
+                    class="text-[12px] font-tech-tag bg-surface-container-high px-2 py-0.5 rounded text-text-muted"
+                    >Socket.IO</span
+                  >
+                  <span
+                    class="text-[12px] font-tech-tag bg-surface-container-high px-2 py-0.5 rounded text-text-muted"
+                    >FCM</span
+                  >
+                </div>
+              </div>
+              <!-- Project 2 -->
+              <div
+                class="group border border-border-inactive/50 p-4 rounded bg-surface-container-lowest/30 hover:bg-surface-container-low transition-all duration-300"
+              >
+                <div class="flex items-center gap-2 mb-2">
+                  <span class="text-mac-green font-terminal-prompt">[+]</span>
+                  <h3 class="font-section-heading text-[20px] text-primary">
+                    Webmail Backend System
+                  </h3>
+                </div>
+                <p class="font-body-text text-body-text text-text-primary mb-4">
+                  Membangun sistem backend webmail kustom dengan
+                  mengintegrasikan Mailcow sebagai engine utamanya.
+                  Mengembangkan API yang efisien menggunakan Go dan Gin untuk
+                  mengelola operasional email berbasis IMAP/SMTP, serta
+                  menggunakan MySQL dan Socket.IO untuk penanganan dan
+                  sinkronisasi data secara real-time.
+                </p>
+                <div class="flex gap-2">
+                  <span
+                    class="text-[12px] font-tech-tag bg-surface-container-high px-2 py-0.5 rounded text-text-muted"
+                    >Go</span
+                  >
+                  <span
+                    class="text-[12px] font-tech-tag bg-surface-container-high px-2 py-0.5 rounded text-text-muted"
+                    >Gin</span
+                  >
+                  <span
+                    class="text-[12px] font-tech-tag bg-surface-container-high px-2 py-0.5 rounded text-text-muted"
+                    >MySQL</span
+                  >
+                  <span
+                    class="text-[12px] font-tech-tag bg-surface-container-high px-2 py-0.5 rounded text-text-muted"
+                    >Socket.IO</span
+                  >
+                  <span
+                    class="text-[12px] font-tech-tag bg-surface-container-high px-2 py-0.5 rounded text-text-muted"
+                    >Mailcow</span
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="font-terminal-prompt text-terminal-prompt pt-4">
+              <span class="text-mac-green">dimas@server</span
+              ><span class="text-text-primary">:</span
+              ><span class="text-primary-container">~/projects</span
+              ><span class="text-text-primary">$ </span
+              ><span class="cursor-blink"></span>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+    <!-- Footer -->
+    <footer
+      class="flex justify-between items-center px-window-padding py-1 w-full fixed bottom-0 z-50 bg-terminal-header border-t border-border-inactive flat no shadows opacity-80 hover:opacity-100 transition-opacity"
+    >
+      <div class="flex items-center gap-4">
+        <span class="font-tech-tag text-tech-tag text-mac-green"
+          >© 2026 Terminal Workspace v2.0.4</span
+        >
+      </div>
+      <div class="flex items-center gap-6">
+        <span class="font-tech-tag text-tech-tag text-text-muted"
+          >Status: Stable</span
+        >
+        <span class="font-tech-tag text-tech-tag text-text-muted"
+          >Uptime: 99.9%</span
+        >
+        <button
+          class="font-tech-tag text-tech-tag text-text-muted hover:text-text-console"
+        >
+          Logs
+        </button>
+      </div>
+    </footer>
+    <script>
+      // Simple micro-interaction for window focus
+      document.querySelectorAll(".terminal-window").forEach((windowEl) => {
+        windowEl.addEventListener("mouseenter", () => {
+          // Focus logic if needed
+        });
+      });
+
+      // Typing effect simulation could go here for the command prompt
+    </script>
+  </body>
+</html>
